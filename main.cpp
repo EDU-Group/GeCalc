@@ -92,7 +92,7 @@ void about(){   //About page
     printf("CrossSolve - by Faver @ https://space.bilibili.com/501018696\n");
     printf("C++ Coding - by T0astForeveR @ https://space.bilibili.com/225255578\n");
     printf("--------------------------------\n");
-    printf("Project URL - https://github.com/T0ast101CN/GeCalc\n");
+    printf("Project URL - https://github.com/EDU-Group/GeCalc\n");
     printf("This calculator follows CC BY-SA 4.0 license.\n");
     system("pause");
 }
