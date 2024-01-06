@@ -4,7 +4,7 @@
 //@ @@@ @   @ @         @ @  @   @
 //@   @ @@@@@ @      @@@@ @  @
 //@   @ @     @   @ @   @ @  @   @   by T0astForeveR & Faver
-// @@@   @@@@  @@@   @@@@  @  @@@    (c) MMXXIII
+// @@@   @@@@  @@@   @@@@  @  @@@    (c) MMXXIV
 
 #include <cstdio>
 #include <cmath>
