@@ -16,9 +16,6 @@
 #include <random>
 #include <windows.h>
 
-#pragma comment(lib, "Netapi32.lib")
-#pragma comment(lib, "Iphlpapi.lib")
-
 time_t timeStamp = time(nullptr);
 
 double x1, x2, prevResult = DBL_MAX; //Solutions to quadratic equation, floating numbers.
