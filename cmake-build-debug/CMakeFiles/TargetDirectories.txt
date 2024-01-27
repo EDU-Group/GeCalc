@@ -1,3 +1,0 @@
-C:/Users/T0astForever/Documents/GitHub/GeCalc/cmake-build-debug/CMakeFiles/GeCalc.dir
-C:/Users/T0astForever/Documents/GitHub/GeCalc/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/T0astForever/Documents/GitHub/GeCalc/cmake-build-debug/CMakeFiles/rebuild_cache.dir
