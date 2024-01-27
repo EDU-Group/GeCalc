@@ -1,6 +1,3 @@
 
-!CMakeLists.txt
-!.gitattributes
-!.gitignore
-!main.cpp
-!README.md
+/.idea
+/cmake-build-debug
