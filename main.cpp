@@ -553,6 +553,7 @@ int main() {
                         goto tri;
                     }
                 }
+                [[fallthrough]];
             }
             case 3:{    //Equations
                 clearScreen();
