@@ -15,6 +15,10 @@
 #include <cstdlib>
 #include <random>
 #include <windows.h>
+#include <cstring>
+
+const std::string ver = "0.2.3";
+const std::string build = "202403081";
 
 time_t timeStamp = time(nullptr);
 
@@ -22,32 +26,29 @@ double x1, x2, prevResult = DBL_MAX; //Solutions to quadratic equation, floating
 int luckinessLevel, crossSolveResult[2][2]={{0, 0}, {0, 0}}; //Cross-solve solutions to quadratic equation, floating numbers.
 bool luckiness = false;
 
-std::string luckinessCall(const int callLevel){
+static std::string luckinessCall(const int callLevel){
     if(100 == callLevel) return "Supercalifragilisticexpialidocious!";
-    if(95 < callLevel) return "Incredible";
-    if(90 < callLevel) return "Excellent";
-    if(85 < callLevel) return "Fantastic";
-    if(80 < callLevel) return "Fabulous";
-    if(75 < callLevel) return "Wonderful";
-    if(70 < callLevel) return "Superior";
-    if(65 < callLevel) return "Decent";
-    if(60 < callLevel) return "Fine";
-    if(55 < callLevel) return "Good";
+    if(95 < callLevel) return "Incredible!";
+    if(90 < callLevel) return "Excellent!";
+    if(85 < callLevel) return "Fantastic!";
+    if(80 < callLevel) return "Fabulous!";
+    if(75 < callLevel) return "Wonderful!";
+    if(70 < callLevel) return "Superior!";
+    if(65 < callLevel) return "Decent~";
+    if(60 < callLevel) return "Fine~";
     if(50 < callLevel) return "Acceptable";
-    if(45 < callLevel) return "Not That Bad";
-    if(35 < callLevel) return "Better Luck Next Time...";
-    if(30 < callLevel) return "Misfortune";
-    if(0 < callLevel) return "Star-crossed";
+    if(30 < callLevel) return "Not That Bad...";
+    if(0 < callLevel) return "Misfortunate...";
     if(0 == callLevel) return "God Bless You...";
     return "This should not happen......";
 }
 
-//void vPrint(const std::vector<double>& vec){   //Vector printing, used for debugging
-//    for(double i : vec) printf("%lf ", i);
-//    printf("\n");
-//}
+static void vPrint(const std::vector<double>& vec){   //Vector printing, used for debugging
+    for(double i : vec) printf("%lf ", i);
+    printf("\n");
+}
 
-void ePrint(double a,double b,double c){    //Equation printing
+static void ePrint(double a,double b,double c){    //Equation printing
     printf("%lfx ^ 2 ",a);
     if(b>0) printf("+ %lfx ",b);
     else if(b<0) printf("- %lfx ",-b);
@@ -56,13 +57,13 @@ void ePrint(double a,double b,double c){    //Equation printing
     else if(c<0) printf("- %lf = 0\n",-c);
 }
 
-void quadEquationSolve(double a,double b,double c){
+static void quadEquationSolve(double a,double b,double c){
     double d=pow(b,2)-4*a*c;
     x1=(-b+std::sqrt(d))/2*a;
     x2=(-b-std::sqrt(d))/2*a;
 }
 
-void crossSolve(int a,int b,int c){
+static void crossSolve(int a,int b,int c){
     for(int i=-abs(int(std::sqrt(a)));i<=abs(int(std::sqrt(a)));i++){
         if((i!=0)&&(a%i==0)){
             for(int j=-abs(c);j<=abs(c);j++){
@@ -80,12 +81,12 @@ void crossSolve(int a,int b,int c){
     }
 }
 
-void clearScreen() {
+static void clearScreen() {
     system("CLS");
-    //printf("--------------------------------\n");
+    //printf("----------------------------------\n");
 }
 
-void init(){    //Initializing splash
+static void init(){    //Initializing splash
     clearScreen();
     printf(" @@@         @@@        @          \n");
     printf("@   @       @   @       @        TM\n");
@@ -94,13 +95,13 @@ void init(){    //Initializing splash
     printf("@   @ @@@@@ @      @@@@ @  @       \n");
     printf("@   @ @     @   @ @   @ @  @   @   \n");
     printf(" @@@   @@@@  @@@   @@@@  @  @@@    \n");
-    printf("--------------------------------\n");
-    printf("General Calculator by T0astForeveR & Faver\nVersion 0.2.2\tBuild 2401061\tSystemTime %lld\n", timeStamp);
+    printf("----------------------------------\n");
+    printf("General Calculator by T0astForeveR & Faver\nVersion %s\tBuild %s\tSystemTime %lld\n", ver.c_str(), build.c_str(), timeStamp);
     Sleep(1500);
     clearScreen();
 }
 
-void about(){   //About page
+static void about(){   //About page
     clearScreen();
     printf(" @@@         @@@        @          \n");
     printf("@   @       @   @       @        TM\n");
@@ -109,33 +110,33 @@ void about(){   //About page
     printf("@   @ @@@@@ @      @@@@ @  @       \n");
     printf("@   @ @     @   @ @   @ @  @   @   \n");
     printf(" @@@   @@@@  @@@   @@@@  @  @@@    \n");
-    printf("--------------------------------\n");
-    printf("General Calculator by T0astForeveR & Faver\nVersion 0.2.2\tBuild 2401061\tSystem Time %lld\n", timeStamp);
-    printf("--------------------------------\n");
+    printf("----------------------------------\n");
+    printf("General Calculator by T0astForeveR & Faver\nVersion %s\tBuild %s\tSystem Time %lld\n", ver.c_str(), build.c_str(), timeStamp);
+    printf("----------------------------------\n");
     printf("CrossSolve - by Faver @ https://space.bilibili.com/501018696\n");
     printf("C++ Coding - by T0astForeveR @ https://space.bilibili.com/225255578\n");
-    printf("--------------------------------\n");
+    printf("----------------------------------\n");
     printf("Project URL - https://github.com/EDU-Group/GeCalc\n");
     printf("This calculator follows CC BY-SA 4.0 license.\n");
     system("pause");
 }
 
-double deg2rad(double a){   //Angle to radian
+static double deg2rad(double a){   //Angle to radian
     const double PI = 3.14159265;
     return a*PI/180;
 }
 
-bool isInt(double a){
+static bool isInt(double a){
     double b = pow(10,-6.0);
     if((a-(int)a<b) && (a-(int)a>-b)) return true;
     else return false;
 }
 
-bool isSquare(double a){
+static bool isSquare(double a){
     return std::sqrt(a)*std::sqrt(a) == a;
 }
 
-double variance(const std::vector<double>& data){
+static double variance(const std::vector<double>& data){
     double accumulate = 0;
     for(double i : data) accumulate += i;
     double m = 0, average = accumulate / (double)data.size();
@@ -143,13 +144,13 @@ double variance(const std::vector<double>& data){
     return m / (double)data.size();
 }
 
-void bubbleSort(std::vector<double>& data){
+static void bubbleSort(std::vector<double>& data){
     for(int i=(int)data.size()-1;i>0;i--)
         for(int j=0;j<i;j++)
             if(data[j]>data[j+1]) std::swap(data[j],data[j+1]);
 }
 
-double median(std::vector<double>& oriData){
+static double median(std::vector<double>& oriData){
     std::vector<double> data(oriData.begin(),oriData.end());
     bubbleSort(data);
     if(data.size()%2==0) return ((data[data.size()/2-1]+data[data.size()/2])/2);
@@ -158,7 +159,7 @@ double median(std::vector<double>& oriData){
 
 int main() {
     init();
-    while("false"){
+    while(1){
         if(luckiness)
             printf(">>\n\n"
 
@@ -197,7 +198,7 @@ int main() {
                 arith:
                 clearScreen();
                 printf(">> arithmetics\n");
-                if(prevResult != DBL_MAX) printf("--------------------------------\nPrevious result = %lf\n--------------------------------", prevResult);
+                if(prevResult != DBL_MAX) printf("----------------------------------\nPrevious result = %lf\n----------------------------------", prevResult);
                 printf("\nEnter arithmetic type\n> 1 | add(+)\n> 2 | subtract(-)\n> 3 | multiply(*)\n> 4 | divide(/)\n> 5 | power(^)\n> 6 | sq-root(^(1/2))\n> 7 | cb-root(^(1/3))\n> 0 | return\n\n>");
                 int u; scanf_s("%d", &u);
                 switch (u) {
@@ -219,7 +220,7 @@ int main() {
                         printf(">> arithmetics >> add(+) >> result\n\n");
                         printf("%lf + %lf = %lf\n", prevResult, b, prevResult + b);
                         prevResult += b;
-                        printf("--------------------------------\n");
+                        printf("----------------------------------\n");
                         printf("> 1 | add(+) again\n> 0 | return\n\n> ");
                         int v;
                         scanf_s("%d",&v);
@@ -258,7 +259,7 @@ int main() {
                         printf(">> arithmetics >> subtract(-) >> result\n\n");
                         printf("%lf - %lf = %lf\n", prevResult, b, prevResult - b);
                         prevResult -= b;
-                        printf("--------------------------------\n");
+                        printf("----------------------------------\n");
                         printf("> 1 | subtract(-) again\n> 0 | return\n\n> ");
                         int v;
                         scanf_s("%d",&v);
@@ -297,7 +298,7 @@ int main() {
                         printf(">> arithmetics >> multiply(*) >> result\n\n");
                         printf("%lf * %lf = %lf\n", prevResult, b, prevResult * b);
                         prevResult *= b;
-                        printf("--------------------------------\n");
+                        printf("----------------------------------\n");
                         printf("> 1 | multiply(*) again\n> 0 | return\n\n> ");
                         int v;
                         scanf_s("%d",&v);
@@ -336,7 +337,7 @@ int main() {
                         printf(">> arithmetics >> divide(/) >> result\n\n");
                         printf("%lf / %lf = %lf\n", prevResult, b, prevResult / b);
                         prevResult /= b;
-                        printf("--------------------------------\n");
+                        printf("----------------------------------\n");
                         printf("> 1 | divide(/) again\n> 0 | return\n\n> ");
                         int v;
                         scanf_s("%d",&v);
@@ -375,7 +376,7 @@ int main() {
                         printf(">> arithmetics >> power(^) >> result\n\n");
                         printf("%lf ^ %lf = %lf\n", prevResult, b, pow(prevResult, b));
                         prevResult = pow(prevResult, b);
-                        printf("--------------------------------\n");
+                        printf("----------------------------------\n");
                         printf("> 1 | power(^) again\n> 0 | return\n\n> ");
                         int v;
                         scanf_s("%d",&v);
@@ -578,7 +579,7 @@ int main() {
                 quad:
                 printf(">> quad-equation >> solving\n\n");
                 ePrint(a,b,c);
-                printf("with delta value %lf\n--------------------------------\n",d);
+                printf("with delta value %lf\n----------------------------------\n",d);
                 if(!isInt(a)||!isInt(b)||!isInt(c)) printf("Enter solving type\n> 1 | numeric\n> - | cross-solve (disabled: integer coefficients only)\n> 0 | return\n\n> ");
                 else if(c==0) printf("Enter solving type\n> 1 | numeric\n> - | cross-solve (disabled: c = 0)\n> 0 | return\n\n> ");
                 else if(!isSquare(d)) printf("Enter solving type\n> 1 | numeric\n> - | cross-solve (disabled: delta is not a square number)\n> 0 | return\n\n> ");
@@ -630,7 +631,7 @@ int main() {
                 clearScreen();
                 printf(">> statistics\n\n");
                 printf("Enter amount of data: ");
-                int inputCount=0,amount=0;
+                int amount=0;
                 scanf_s("%d",&amount);
                 if (!amount) {
                     clearScreen();
@@ -641,42 +642,43 @@ int main() {
                 clearScreen();
                 printf(">> statistics\n\n");
                 printf("Enter data\n");
-                double data[amount];
-                for(double & i : data){
-                    printf("data[%d/%d] = ",++inputCount,amount);
-                    scanf_s("%lf", &i);
+                std::vector<double> data;
+                for (int i = 0; i < amount; ++i) {
+                    double input = 0;
+                    printf("data[%d/%d] = ",i+1,amount);
+                    scanf_s("%lf", &input);
+                    data.push_back(input);
                 }
                 clearScreen();
                 printf(">> statistics >> result\n\n");
                 int weighted = 0;
                 stat:
-                std::vector<double> vecData (data, data+amount);
                 if(!weighted) printf("Data:\n");
                 else printf("Data(%d):\n",weighted+1);
                 for(int i=0;i<amount;i++) printf("data[%d] = %lf\n",i+1,data[i]);
                 if(amount-1){
-                    printf("--------------------------------\n");
-                    double accumulate = 0, var = variance(vecData);
-                    for (double i: vecData) accumulate += i;
-                    printf("Accumulate = %lf\n", accumulate);
-                    printf("Average = %lf\n", accumulate / amount);
-                    printf("Variance = %lf\n", var);
-                    printf("Std. Deviation = %lf\n", std::sqrt(var));
-                    printf("Median = %lf\n", median(vecData));
+                    printf("----------------------------------\n");
+                    double accumulate = 0, var = variance(data);
+                    for (double i: data) accumulate += i;
+                    printf("Accumulate\n%+33lf\n", accumulate);
+                    printf("Average\n%+33lf\n", accumulate / amount);
+                    printf("Variance\n%+33lf\n", var);
+                    printf("Std. Deviation\n%+33lf\n", std::sqrt(var));
+                    printf("Median\n%+33lf\n", median(data));
                     if (weighted) {
-                        printf("--------------------------------\n");
+                        printf("----------------------------------\n");
                         printf("> 1 | set weightings again\n> 0 | return\n\n> ");
                     } else {
-                        printf("--------------------------------\n");
+                        printf("----------------------------------\n");
                         printf("> 1 | set weightings\n> 0 | return\n\n> ");
                     }
                 }
                 else{
                     if (weighted) {
-                        printf("--------------------------------\n");
+                        printf("----------------------------------\n");
                         printf("> 1 | go multiplying again\n> 0 | return\n\n> ");
                     } else {
-                        printf("--------------------------------\n");
+                        printf("----------------------------------\n");
                         printf("> 1 | go multiplying\n> 0 | return\n\n> ");
                     }
                 }
@@ -686,10 +688,10 @@ int main() {
                     case 0: break;
                     case 1:{
                         clearScreen();
+                        if(amount-1) printf(">> statistics >> set weightings\n\n");
+                        else printf(">> statistics >> multiplying\n\n");
                         for(int i=0;i<amount;i++){
                             double alt;
-                            if(amount-1) printf(">> statistics >> set weightings\n\n");
-                            else printf(">> statistics >> multiplying\n\n");
                             printf("data[%d] = %lf * ",i+1,data[i]);
                             scanf_s("%lf",&alt);
                             data[i] *= alt;
