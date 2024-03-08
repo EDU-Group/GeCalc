@@ -6,16 +6,16 @@
 //@   @ @     @   @ @   @ @  @   @   by T0astForeveR & Faver
 // @@@   @@@@  @@@   @@@@  @  @@@    (c) MMXXIV
 
-#include <cstdio>
-#include <cmath>
-#include <vector>
 #include <algorithm>
-#include <ctime>
 #include <cfloat>
+#include <cmath>
+#include <cstdio>
 #include <cstdlib>
-#include <random>
-#include <windows.h>
 #include <cstring>
+#include <ctime>
+#include <random>
+#include <vector>
+#include <windows.h>
 
 const std::string ver = "0.2.3";
 const std::string build = "202403081";
