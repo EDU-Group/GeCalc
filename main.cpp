@@ -189,7 +189,7 @@ int main() {
                    "> ");
         int t; scanf_s("%d", &t);
         switch (t) {
-            case 0: return 0;
+            case 0: return 0x0;
             case 9: {
                 about();
                 break;
@@ -441,7 +441,7 @@ int main() {
                 printf("Select unit\n> 1 | angle(deg)\n> 2 | radian(rad)\n> 0 | return\n\n> ");
                 int r; scanf_s("%d",&r);
                 switch(r){
-                    case 0: goto arith;
+                    case 0: goto triEnd;
                     case 1: break;
                     case 2: {
                         rad = true;
@@ -553,7 +553,8 @@ int main() {
                         goto tri;
                     }
                 }
-                [[fallthrough]];
+            triEnd:
+            break;
             }
             case 3:{    //Equations
                 clearScreen();
