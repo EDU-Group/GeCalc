@@ -17,7 +17,7 @@
 #include <vector>
 #include <windows.h>
 
-const std::string ver = "0.2.3";
+const std::string ver = "0.2.4";
 const std::string build = "202403081";
 
 time_t timeStamp = time(nullptr);
